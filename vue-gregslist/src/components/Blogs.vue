@@ -17,17 +17,21 @@
 </template>
 
 <script>
-    import { store } from '../store'
     export default {
         data(){
             return{
-                blogs: store.state.blogs,
+                // blogs: store.state.blogs,
                 test: 'suppose'
             }
         },
-        beforeCreate(){
-            store.getBlogs()
+        computed:{
+            blogs(){
+                return this.$store.state.blogs
+            }
         }
+        // beforeCreate(){
+        //     store.getBlogs()
+        // }
     }
 </script>
 

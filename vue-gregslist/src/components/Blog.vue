@@ -1,6 +1,7 @@
 <template>
         <div>
-            <h1>Blog</h1>
+            <h1>{{blog.title}}</h1>
+            <p v-html="blog.body"></p>
         </div>
     </template>
     
@@ -8,14 +9,20 @@
         export default {
             data(){
                 return{
-                    
-                    id: 'this.$route.params.blogId'
                 }
             },
             mounted(){
+                this.$store.dispatch('getBlog', this.$route.params.blogId)
                 console.log(this.$route.params.blogId)
+            },
+            computed:{
+                blog(){
+                    return this.$store.state.activeBlog
+                }
             }
-        }
+
+            }
+        
     </script>
     
     <style></style>

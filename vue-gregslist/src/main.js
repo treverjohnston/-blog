@@ -3,13 +3,19 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import {store} from './store'
 
 Vue.config.productionTip = false
+
+Vue.component('Trumbowyg', VueTrumbowyg.default);
+
+// $.trumbowyg.svgPath = '/assets/my-custom-path/icons.svg'
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 }) 
