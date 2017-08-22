@@ -1,12 +1,9 @@
 var express = require('express')
-// var cors = require('cors');
 var router = express.Router()
 var mongoose = require('mongoose')
 var server = express();
 
 
-// server.use(cors());
-//  TODO
 var blogSchema = new mongoose.Schema({
     title: {type: String, required: true},
     body: {type: String, required: true}
