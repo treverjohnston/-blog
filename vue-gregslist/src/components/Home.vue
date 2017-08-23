@@ -1,33 +1,25 @@
 <template>
-    <div>
-        <form @submit.prevent="createNewBlog()">
-            <div class="form-group">
-                <input class="form-control" type="text" v-model="title" placeholder="Title">
-                <div>
-                    <trumbowyg v-model='body'></trumbowyg>
-                </div>
-                <button type="submit" class="btn btn-default">Create</button>
-            </div>
-        </form>
-        <hr>
+    <div class="home">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="heading">Explore Posts</h2>
+                    <hr>
+                </div>
                 <div v-if="blogs.length > 0">
                     <ul v-for="blog in blogs">
-                        <div class="col-xs-11">
-                            <h1 class="text-center">
-                                <router-link :to="{name: 'Blog', params: {blogId: blog._id}}">
-                                    {{blog.title}}
-                                </router-link>   
-                            </h1>
-                            <div v-html="blog.body">
-                            </div>
+                        <div class="col-xs-12">
+                            <h2 class="text-center">
+                                <router-link :to="{name: 'Blog', params: {blogId: blog._id}}">{{blog.title}} <div class="glyphicon glyphicon-share-alt"></div></router-link>
+                            </h2>
                             <hr>
                         </div>
-                        <div class="col-xs-1">
-                            <button class="btn btn-danger" @click="deleteBlog(blog._id)">Delete</button>
-                        </div>
                     </ul>
+                    <div class="text-center">
+                        <router-link :to="{name: 'Blogs'}">
+                            <h4>Click To See All Posts</h4>
+                        </router-link>
+                    </div>
                 </div>
                 <div v-else>
                     <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="">
@@ -38,17 +30,17 @@
 </template>
 
 <script>
-    import trumbowyg from 'vue-trumbowyg';
-    import 'trumbowyg/dist/ui/trumbowyg.css';
-
+    // import trumbowyg from 'vue-trumbowyg';
+    // import 'trumbowyg/dist/ui/trumbowyg.css';
+    import Wiggy from './Wiggy'
+    import Blogs from './Blogs'
 
     export default {
         data() {
             return {
                 test: 'guess',
                 title: '',
-                body: '',
-                content: ''
+                body: ''
             }
         },
 
@@ -58,36 +50,34 @@
             }
         },
 
-        component: {
-            trumbowyg
-        },
-
-        methods: {
-            createNewBlog() {
-                var newBlog = {
-                    title: this.title,
-                    body: this.body
-                }
-                this.$store.dispatch("createBlog", newBlog)
-                // this.$store.actions.createBlog() //this is essentially the same as above
-            },
-
-            deleteBlog(blogId){
-                this.$store.dispatch("deleteBlog", blogId)
-            }
-        },
 
         // Lifecycle Hooks
         mounted() {
             this.$store.dispatch("getBlogs")
         },
-        beforeDestroy() {
-            console.log("Goodbye home")
+
+        components: {
+            // trumbowyg,
+            Wiggy,
+            Blogs
         }
     }
 
 </script>
 
-<style>
-    /* @import '~trumbowyg/dist/ui/css/trumbowyg.css' */
+<style scoped>
+    .trumbowyg-editor {
+        background-color: white;
+    }
+
+    hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+
+    .heading {
+        text-align: center;
+        font-size: 6rem;
+    }
 </style>

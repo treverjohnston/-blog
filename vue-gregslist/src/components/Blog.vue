@@ -1,28 +1,32 @@
 <template>
-        <div>
-            <h1>{{blog.title}}</h1>
-            <p v-html="blog.body"></p>
+    <div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>{{blog.title}}</h1>
+                    <p v-html="blog.body"></p>
+                </div>
+            </div>
         </div>
-    </template>
-    
-    <script>
-        export default {
-            data(){
-                return{
-                }
-            },
-            mounted(){
-                this.$store.dispatch('getBlog', this.$route.params.blogId)
-                console.log(this.$route.params.blogId)
-            },
-            computed:{
-                blog(){
-                    return this.$store.state.activeBlog
-                }
-            }
+    </div>
+</template>
 
+<script>
+    export default {
+        data() {
+            return {
             }
-        
-    </script>
-    
-    <style></style>
+        },
+        mounted() {
+            this.$store.dispatch('getBlog', this.$route.params.blogId)
+        },
+        computed: {
+            blog() {
+                return this.$store.state.activeBlog
+            }
+        }
+
+    }
+</script>
+
+<style></style>
